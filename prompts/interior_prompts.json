@@ -1,0 +1,131 @@
+{
+  "meta": {
+    "trigger_word": "CrestlineInt",
+    "base_negative": "blurry, low quality, distorted, cartoon, painting, illustration, people, person, crowd, watermark, text, logo, ugly, deformed, oversaturated, flat, amateur, outdoors",
+    "lora": "Crestline_Shreshth_v2",
+    "lora_strength": 1.0,
+    "description": "Tested interior prompts for Crestline Shreshth amenity spaces. All prompts use the CrestlineInt trigger word."
+  },
+  "prompts": [
+    {
+      "id": "INT_001",
+      "label": "Swimming Pool — Golden Light",
+      "positive": "CrestlineInt, indoors, no humans, swimming pool, turquoise water, poolside, modern pool area, warm golden ambient lighting, luxury amenity, tiles, high ceiling, residential complex, photorealistic, ultra-detailed, 8k",
+      "negative": "blurry, low quality, distorted, cartoon, painting, people, watermark, text, outdoors",
+      "cfg": 6.5,
+      "steps": 30
+    },
+    {
+      "id": "INT_002",
+      "label": "Swimming Pool — Blue Hour Mood",
+      "positive": "CrestlineInt, indoors, no humans, indoor swimming pool, cool blue lighting, twilight atmosphere, reflections on water surface, modern luxury pool, architectural photography, ultra-detailed, 8k",
+      "negative": "blurry, low quality, distorted, cartoon, painting, people, watermark, text, outdoors",
+      "cfg": 7.0,
+      "steps": 35
+    },
+    {
+      "id": "INT_003",
+      "label": "Gymnasium — Modern Equipment",
+      "positive": "CrestlineInt, indoors, no humans, luxury gymnasium, modern fitness equipment, clean gym floor, bright LED lighting, mirrored walls, residential amenity, high ceiling, photorealistic, ultra-detailed, 8k",
+      "negative": "blurry, low quality, distorted, cartoon, painting, people, watermark, text, outdoors",
+      "cfg": 6.5,
+      "steps": 30
+    },
+    {
+      "id": "INT_004",
+      "label": "Gymnasium — Moody Dramatic",
+      "positive": "CrestlineInt, indoors, no humans, luxury gym interior, dramatic spot lighting, moody dark atmosphere, premium fitness equipment, polished floor reflections, architectural photography, ultra-detailed, 8k",
+      "negative": "blurry, low quality, distorted, cartoon, painting, people, watermark, text, outdoors",
+      "cfg": 7.0,
+      "steps": 35
+    },
+    {
+      "id": "INT_005",
+      "label": "Library — Warm Reading Room",
+      "positive": "CrestlineInt, indoors, no humans, library, tall bookshelves, reading area, comfortable seating, warm amber lighting, wooden furniture, modern interior, study room, residential amenity, photorealistic, ultra-detailed, 8k",
+      "negative": "blurry, low quality, distorted, cartoon, painting, people, watermark, text, outdoors",
+      "cfg": 6.5,
+      "steps": 30
+    },
+    {
+      "id": "INT_006",
+      "label": "Library — Natural Daylight",
+      "positive": "CrestlineInt, indoors, no humans, residential library, large windows, natural daylight streaming in, bookshelves, reading chairs, bright airy atmosphere, modern luxury interior, ultra-detailed, 8k",
+      "negative": "blurry, low quality, distorted, cartoon, painting, people, watermark, text, outdoors",
+      "cfg": 6.5,
+      "steps": 30
+    },
+    {
+      "id": "INT_007",
+      "label": "Lobby — Grand Entrance",
+      "positive": "CrestlineInt, indoors, no humans, grand lobby, marble floor, high ceiling, modern reception area, luxury residential entrance, ambient lighting, architectural photography, ultra-detailed, 8k",
+      "negative": "blurry, low quality, distorted, cartoon, painting, people, watermark, text, outdoors",
+      "cfg": 7.0,
+      "steps": 30
+    },
+    {
+      "id": "INT_008",
+      "label": "Lobby — Evening Ambience",
+      "positive": "CrestlineInt, indoors, no humans, luxury apartment lobby, warm evening lighting, decorative ceiling lights, marble walls and floor, modern furniture, hospitality feel, ultra-detailed, 8k",
+      "negative": "blurry, low quality, distorted, cartoon, painting, people, watermark, text, outdoors",
+      "cfg": 6.5,
+      "steps": 30
+    },
+    {
+      "id": "INT_009",
+      "label": "Meditation Room — Zen",
+      "positive": "CrestlineInt, indoors, no humans, meditation room, zen atmosphere, soft diffused lighting, wooden floor, minimal decor, peaceful serene space, residential wellness amenity, ultra-detailed, 8k",
+      "negative": "blurry, low quality, distorted, cartoon, painting, people, watermark, text, outdoors, cluttered",
+      "cfg": 6.0,
+      "steps": 30
+    },
+    {
+      "id": "INT_010",
+      "label": "Corridor — Premium Hallway",
+      "positive": "CrestlineInt, indoors, no humans, luxury residential corridor, premium hallway, wall sconces lighting, polished floor, clean modern design, leading lines perspective, architectural photography, ultra-detailed, 8k",
+      "negative": "blurry, low quality, distorted, cartoon, painting, people, watermark, text, outdoors",
+      "cfg": 6.5,
+      "steps": 30
+    },
+    {
+      "id": "INT_011",
+      "label": "Rooftop Terrace — Outdoor Lounge",
+      "positive": "CrestlineInt, rooftop terrace, outdoor lounge area, modern furniture, city view background, warm evening sky, luxury residential amenity, architectural photography, ultra-detailed, 8k",
+      "negative": "blurry, low quality, distorted, cartoon, painting, people, watermark, text",
+      "cfg": 6.5,
+      "steps": 30
+    },
+    {
+      "id": "INT_012",
+      "label": "Indoor Garden / Green Zone",
+      "positive": "CrestlineInt, indoors, no humans, indoor garden, tropical plants, lush greenery, natural light, biophilic design, luxury residential amenity, architectural photography, ultra-detailed, 8k",
+      "negative": "blurry, low quality, distorted, cartoon, painting, people, watermark, text, outdoors",
+      "cfg": 6.5,
+      "steps": 30
+    },
+    {
+      "id": "INT_013",
+      "label": "Kids Play Area",
+      "positive": "CrestlineInt, indoors, no humans, children's play area, colorful safe play equipment, bright cheerful lighting, modern residential amenity, clean interior, ultra-detailed, 8k",
+      "negative": "blurry, low quality, distorted, cartoon, painting, people, watermark, text, outdoors, dark",
+      "cfg": 6.0,
+      "steps": 30
+    },
+    {
+      "id": "INT_014",
+      "label": "Community Hall — Event Space",
+      "positive": "CrestlineInt, indoors, no humans, multipurpose community hall, large event space, modern interior, ambient lighting, wooden flooring, high ceiling, residential amenity, ultra-detailed, 8k",
+      "negative": "blurry, low quality, distorted, cartoon, painting, people, watermark, text, outdoors",
+      "cfg": 6.5,
+      "steps": 30
+    },
+    {
+      "id": "INT_015",
+      "label": "Spa / Wellness Center",
+      "positive": "CrestlineInt, indoors, no humans, luxury spa, wellness center, relaxation room, soft warm lighting, stone textures, serene atmosphere, premium residential amenity, ultra-detailed, 8k",
+      "negative": "blurry, low quality, distorted, cartoon, painting, people, watermark, text, outdoors",
+      "cfg": 6.5,
+      "steps": 35
+    }
+  ]
+}

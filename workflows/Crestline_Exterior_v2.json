@@ -1,0 +1,160 @@
+{
+  "id": "c2617a1b-cf05-4a4f-86a1-bf14f8862c6d",
+  "revision": 1,
+  "last_node_id": 10,
+  "last_link_id": 12,
+  "nodes": [
+    {
+      "id": 2,
+      "type": "CheckpointLoaderSimple",
+      "pos": [93, -29],
+      "size": [270, 98],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [{"localized_name": "ckpt_name", "name": "ckpt_name", "type": "COMBO", "widget": {"name": "ckpt_name"}, "link": null}],
+      "outputs": [
+        {"localized_name": "MODEL", "name": "MODEL", "type": "MODEL", "links": [1]},
+        {"localized_name": "CLIP", "name": "CLIP", "type": "CLIP", "links": [8]},
+        {"localized_name": "VAE", "name": "VAE", "type": "VAE", "links": [7]}
+      ],
+      "properties": {"Node name for S&R": "CheckpointLoaderSimple"},
+      "widgets_values": ["v1-5-pruned-emaonly-fp16.safetensors"]
+    },
+    {
+      "id": 1,
+      "type": "LoraLoader",
+      "pos": [686, -141],
+      "size": [270, 126],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {"localized_name": "model", "name": "model", "type": "MODEL", "link": 1},
+        {"localized_name": "clip", "name": "clip", "type": "CLIP", "link": 8},
+        {"localized_name": "lora_name", "name": "lora_name", "type": "COMBO", "widget": {"name": "lora_name"}, "link": null},
+        {"localized_name": "strength_model", "name": "strength_model", "type": "FLOAT", "widget": {"name": "strength_model"}, "link": null},
+        {"localized_name": "strength_clip", "name": "strength_clip", "type": "FLOAT", "widget": {"name": "strength_clip"}, "link": null}
+      ],
+      "outputs": [
+        {"localized_name": "MODEL", "name": "MODEL", "type": "MODEL", "links": [3]},
+        {"localized_name": "CLIP", "name": "CLIP", "type": "CLIP", "links": [4, 10]}
+      ],
+      "properties": {"Node name for S&R": "LoraLoader"},
+      "widgets_values": ["Crestline_Shreshth_v1.safetensors", 1, 1]
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [1082, 177],
+      "size": [420, 140],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [{"localized_name": "clip", "name": "clip", "type": "CLIP", "link": 4}],
+      "outputs": [{"localized_name": "CONDITIONING", "name": "CONDITIONING", "type": "CONDITIONING", "links": [9]}],
+      "properties": {"Node name for S&R": "CLIPTextEncode"},
+      "widgets_values": ["CrestlineExt, high-end modern residential skyscraper, glass balconies, sleek architectural facade, golden hour lighting, photorealistic materials, cinematic architectural photography, ultra-detailed, 8k, sharp focus, professional render"]
+    },
+    {
+      "id": 9,
+      "type": "CLIPTextEncode",
+      "pos": [940, 458],
+      "size": [420, 160],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [{"localized_name": "clip", "name": "clip", "type": "CLIP", "link": 10}],
+      "outputs": [{"localized_name": "CONDITIONING", "name": "CONDITIONING", "type": "CONDITIONING", "links": [11]}],
+      "properties": {"Node name for S&R": "CLIPTextEncode"},
+      "widgets_values": ["blurry, low quality, distorted, cartoon, painting, illustration, deformed, artifacts, watermark, text, people, crowd, overexposed, ugly, amateur, grainy, out of focus"]
+    },
+    {
+      "id": 7,
+      "type": "EmptyLatentImage",
+      "pos": [1420, 591],
+      "size": [270, 106],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {"localized_name": "width", "name": "width", "type": "INT", "widget": {"name": "width"}, "link": null},
+        {"localized_name": "height", "name": "height", "type": "INT", "widget": {"name": "height"}, "link": null},
+        {"localized_name": "batch_size", "name": "batch_size", "type": "INT", "widget": {"name": "batch_size"}, "link": null}
+      ],
+      "outputs": [{"localized_name": "LATENT", "name": "LATENT", "type": "LATENT", "links": [5]}],
+      "properties": {"Node name for S&R": "EmptyLatentImage"},
+      "widgets_values": [768, 1024, 1]
+    },
+    {
+      "id": 5,
+      "type": "KSampler",
+      "pos": [2040, 274],
+      "size": [407, 287],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {"localized_name": "model", "name": "model", "type": "MODEL", "link": 3},
+        {"localized_name": "positive", "name": "positive", "type": "CONDITIONING", "link": 9},
+        {"localized_name": "negative", "name": "negative", "type": "CONDITIONING", "link": 11},
+        {"localized_name": "latent_image", "name": "latent_image", "type": "LATENT", "link": 5},
+        {"localized_name": "seed", "name": "seed", "type": "INT", "widget": {"name": "seed"}, "link": null},
+        {"localized_name": "steps", "name": "steps", "type": "INT", "widget": {"name": "steps"}, "link": null},
+        {"localized_name": "cfg", "name": "cfg", "type": "FLOAT", "widget": {"name": "cfg"}, "link": null},
+        {"localized_name": "sampler_name", "name": "sampler_name", "type": "COMBO", "widget": {"name": "sampler_name"}, "link": null},
+        {"localized_name": "scheduler", "name": "scheduler", "type": "COMBO", "widget": {"name": "scheduler"}, "link": null},
+        {"localized_name": "denoise", "name": "denoise", "type": "FLOAT", "widget": {"name": "denoise"}, "link": null}
+      ],
+      "outputs": [{"localized_name": "LATENT", "name": "LATENT", "type": "LATENT", "links": [6]}],
+      "properties": {"Node name for S&R": "KSampler"},
+      "widgets_values": [929237012918784, "randomize", 30, 6.5, "dpmpp_2m", "karras", 1]
+    },
+    {
+      "id": 8,
+      "type": "VAEDecode",
+      "pos": [1516, 1276],
+      "size": [140, 46],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {"localized_name": "samples", "name": "samples", "type": "LATENT", "link": 6},
+        {"localized_name": "vae", "name": "vae", "type": "VAE", "link": 7}
+      ],
+      "outputs": [{"localized_name": "IMAGE", "name": "IMAGE", "type": "IMAGE", "links": [12]}],
+      "properties": {"Node name for S&R": "VAEDecode"},
+      "widgets_values": []
+    },
+    {
+      "id": 10,
+      "type": "SaveImage",
+      "pos": [1949, 1128],
+      "size": [215, 58],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [{"localized_name": "images", "name": "images", "type": "IMAGE", "link": 12}],
+      "outputs": [],
+      "properties": {"Node name for S&R": "SaveImage"},
+      "widgets_values": ["CrestlineExt_"]
+    }
+  ],
+  "links": [
+    [1, 2, 0, 1, 0, "MODEL"],
+    [3, 1, 0, 5, 0, "MODEL"],
+    [4, 1, 1, 6, 0, "CLIP"],
+    [5, 7, 0, 5, 3, "LATENT"],
+    [6, 5, 0, 8, 0, "LATENT"],
+    [7, 2, 2, 8, 1, "VAE"],
+    [8, 2, 1, 1, 1, "CLIP"],
+    [9, 6, 0, 5, 1, "CONDITIONING"],
+    [10, 1, 1, 9, 0, "CLIP"],
+    [11, 9, 0, 5, 2, "CONDITIONING"],
+    [12, 8, 0, 10, 0, "IMAGE"]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {"workflowRendererVersion": "LG"},
+  "version": 0.4
+}

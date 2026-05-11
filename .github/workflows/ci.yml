@@ -1,0 +1,159 @@
+name: CI — Validate Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    name: Validate Pipeline Integrity
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install validation tools
+        run: pip install ruff tomli
+
+      - name: Check Python syntax (all scripts)
+        run: |
+          echo "==> Checking Python syntax..."
+          python -m py_compile scripts/batch_generate.py
+          echo "    scripts/batch_generate.py — OK"
+
+      - name: Lint Python with ruff
+        run: |
+          echo "==> Running ruff linter..."
+          ruff check scripts/ --select E,F,W --ignore E501,F401
+          echo "    Lint passed."
+
+      - name: Validate workflow JSON files
+        run: |
+          echo "==> Validating workflow JSON files..."
+          for f in workflows/*.json; do
+            python -c "import json,sys; json.load(open('$f'))" \
+              && echo "    $f — valid" \
+              || { echo "    INVALID JSON: $f"; exit 1; }
+          done
+
+      - name: Validate prompt library JSON files
+        run: |
+          echo "==> Validating prompt library..."
+          python - <<'EOF'
+          import json, sys, pathlib
+
+          required_fields = {"id", "label", "positive", "negative"}
+          errors = []
+
+          for path in pathlib.Path("prompts").glob("*.json"):
+              try:
+                  data = json.loads(path.read_text())
+              except json.JSONDecodeError as e:
+                  errors.append(f"{path}: invalid JSON — {e}")
+                  continue
+
+              if "prompts" not in data:
+                  errors.append(f"{path}: missing top-level 'prompts' key")
+                  continue
+
+              for entry in data["prompts"]:
+                  missing = required_fields - entry.keys()
+                  if missing:
+                      errors.append(f"{path} [{entry.get('id','?')}]: missing fields {missing}")
+
+          if errors:
+              print("Prompt library validation FAILED:")
+              for e in errors:
+                  print(f"  - {e}")
+              sys.exit(1)
+
+          print(f"    All prompt files valid.")
+          EOF
+
+      - name: Validate training TOML config
+        run: |
+          echo "==> Validating training config (TOML)..."
+          python - <<'EOF'
+          import tomli, pathlib, sys
+
+          toml_files = list(pathlib.Path("training").glob("*.toml"))
+          if not toml_files:
+              print("    No TOML files found in training/ — skipping.")
+              sys.exit(0)
+
+          for path in toml_files:
+              try:
+                  tomli.loads(path.read_text())
+                  print(f"    {path.name} — valid")
+              except Exception as e:
+                  print(f"    INVALID TOML: {path.name} — {e}")
+                  sys.exit(1)
+          EOF
+
+      - name: Validate dataset caption integrity
+        run: |
+          echo "==> Checking dataset caption integrity..."
+          python - <<'EOF'
+          import pathlib, sys
+
+          dataset = pathlib.Path("dataset")
+          errors = []
+
+          for img in dataset.rglob("*.jpg"):
+              txt = img.with_suffix(".txt")
+              if not txt.exists():
+                  errors.append(f"Missing caption: {img}")
+              elif txt.stat().st_size == 0:
+                  errors.append(f"Empty caption: {txt}")
+
+          if errors:
+              print("Dataset integrity check FAILED:")
+              for e in errors:
+                  print(f"  - {e}")
+              sys.exit(1)
+
+          img_count = len(list(dataset.rglob("*.jpg")))
+          print(f"    {img_count} images — all have non-empty captions. OK")
+          EOF
+
+      - name: Validate required files exist
+        run: |
+          echo "==> Checking required project files..."
+          python - <<'EOF'
+          import pathlib, sys
+
+          required = [
+              "README.md",
+              "LICENSE",
+              ".gitignore",
+              "launch.bat",
+              "training/config_lora_v2.toml",
+              "training/sample_prompt.txt",
+              "prompts/exterior_prompts.json",
+              "prompts/interior_prompts.json",
+              "scripts/batch_generate.py",
+              "scripts/requirements.txt",
+              "workflows/Crestline_Exterior_v2.json",
+              "workflows/Crestline_Interior_v2.json",
+          ]
+
+          missing = [f for f in required if not pathlib.Path(f).exists()]
+          if missing:
+              print("Required files missing:")
+              for f in missing:
+                  print(f"  - {f}")
+              sys.exit(1)
+
+          print(f"    All {len(required)} required files present. OK")
+          EOF
+
+      - name: All checks passed
+        run: echo "Pipeline integrity verified successfully."

@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+.venv/
+venv/
+env/
+.env
+*.env
+
+# Model weights — too large for Git
+models/*.safetensors
+models/*.ckpt
+models/*.pt
+models/*.bin
+models/sample/
+
+# Generated outputs — do not commit renders
+outputs/**/*.png
+outputs/**/*.jpg
+outputs/**/*.webp
+outputs/**/*.mp4
+!outputs/.gitkeep
+
+# Logs — exclude all content, keep directory marker only
+logs/**
+!logs/.gitkeep
+
+# Training cache
+dataset/**/__pycache__/
+dataset/**/latents/
+training/latents/
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+*.lnk
+
+# Personal notes — never push
+PREP.txt
+*.secret
+*.private
+
+# IDE
+.vscode/
+.idea/
+*.suo
+*.user

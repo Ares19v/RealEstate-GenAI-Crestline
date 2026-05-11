@@ -1,0 +1,131 @@
+{
+  "meta": {
+    "trigger_word": "CrestlineExt",
+    "base_negative": "blurry, low quality, distorted, cartoon, painting, illustration, people, person, crowd, watermark, text, logo, ugly, deformed, oversaturated, flat, amateur",
+    "lora": "Crestline_Shreshth_v2",
+    "lora_strength": 1.0,
+    "description": "Tested exterior prompts for Crestline Shreshth. All prompts use the CrestlineExt trigger word. Add or modify entries freely — the batch script picks them up automatically."
+  },
+  "prompts": [
+    {
+      "id": "EXT_001",
+      "label": "Golden Hour Hero Shot",
+      "positive": "CrestlineExt, high-end modern residential skyscraper, glass balconies, sleek architectural facade, golden hour lighting, warm sunlight, long shadows, photorealistic materials, cinematic architectural photography, ultra-detailed, 8k, sharp focus",
+      "negative": "blurry, low quality, distorted, cartoon, painting, people, watermark, text",
+      "cfg": 6.5,
+      "steps": 30
+    },
+    {
+      "id": "EXT_002",
+      "label": "Blue Hour Twilight",
+      "positive": "CrestlineExt, luxury residential tower, glass facade, blue hour, dusk, city lights reflecting on windows, twilight sky, dramatic atmosphere, architectural photography, ultra-detailed, 8k, cinematic",
+      "negative": "blurry, low quality, distorted, cartoon, painting, people, watermark, text",
+      "cfg": 7.0,
+      "steps": 30
+    },
+    {
+      "id": "EXT_003",
+      "label": "Night Shot — Lit Balconies",
+      "positive": "CrestlineExt, modern residential high-rise at night, illuminated balconies, warm interior lights glowing, dark sky, city skyline background, architectural photography, ultra-detailed, 8k, long exposure feel",
+      "negative": "blurry, low quality, distorted, cartoon, painting, people, watermark, text",
+      "cfg": 7.0,
+      "steps": 35
+    },
+    {
+      "id": "EXT_004",
+      "label": "Morning Fog Atmosphere",
+      "positive": "CrestlineExt, luxury apartment tower, morning mist, soft diffused light, sunrise, ethereal atmosphere, glass and concrete facade, photorealistic, architectural photography, 8k, sharp",
+      "negative": "blurry, low quality, distorted, cartoon, painting, people, watermark, text",
+      "cfg": 6.5,
+      "steps": 30
+    },
+    {
+      "id": "EXT_005",
+      "label": "Overcast Sky — Editorial",
+      "positive": "CrestlineExt, modern residential skyscraper, dramatic overcast sky, moody grey clouds, bold architectural lines, clean facade, editorial architectural photography, ultra-detailed, 8k",
+      "negative": "blurry, low quality, distorted, cartoon, painting, people, watermark, text",
+      "cfg": 6.0,
+      "steps": 30
+    },
+    {
+      "id": "EXT_006",
+      "label": "Wide Establishing Shot",
+      "positive": "CrestlineExt, wide angle establishing shot, luxury residential development, full building visible, surrounding landscape, blue sky with clouds, photorealistic, architectural photography, ultra-detailed, 8k",
+      "negative": "blurry, low quality, distorted, cartoon, painting, people, watermark, text, cropped, partial building",
+      "cfg": 6.5,
+      "steps": 30
+    },
+    {
+      "id": "EXT_007",
+      "label": "Low Angle Hero — Billboard Crop",
+      "positive": "CrestlineExt, low angle shot looking upward at luxury residential tower, dramatic perspective, glass facade, sky background, bold cinematic framing, photorealistic, 8k, sharp",
+      "negative": "blurry, low quality, distorted, cartoon, painting, people, watermark, text",
+      "cfg": 7.0,
+      "steps": 30
+    },
+    {
+      "id": "EXT_008",
+      "label": "Drone Aerial Perspective",
+      "positive": "CrestlineExt, aerial view from drone, luxury residential complex, bird's eye perspective, rooftop visible, surrounding urban context, soft afternoon light, architectural photography, 8k, ultra-detailed",
+      "negative": "blurry, low quality, distorted, cartoon, painting, people, watermark, text",
+      "cfg": 6.5,
+      "steps": 30
+    },
+    {
+      "id": "EXT_009",
+      "label": "Facade Detail Close-Up",
+      "positive": "CrestlineExt, close-up detail of modern residential facade, glass balcony railing, architectural material detail, sunlight reflection on glass, sharp textures, macro architectural photography, ultra-detailed, 8k",
+      "negative": "blurry, low quality, distorted, cartoon, painting, people, watermark, text",
+      "cfg": 6.5,
+      "steps": 35
+    },
+    {
+      "id": "EXT_010",
+      "label": "Rain — Dramatic Weather",
+      "positive": "CrestlineExt, luxury residential tower in light rain, wet glass facade, rain drops on windows, dramatic grey sky, moody atmosphere, cinematic, architectural photography, ultra-detailed, 8k",
+      "negative": "blurry, low quality, distorted, cartoon, painting, people, watermark, text, flooded",
+      "cfg": 7.0,
+      "steps": 35
+    },
+    {
+      "id": "EXT_011",
+      "label": "Sunset — Portrait Crop (Social Media)",
+      "positive": "CrestlineExt, luxury apartment tower, vibrant sunset sky, orange and pink clouds, silhouette framing, warm glow on facade, vertical portrait composition, social media ready, cinematic, 8k",
+      "negative": "blurry, low quality, distorted, cartoon, painting, people, watermark, text",
+      "cfg": 6.5,
+      "steps": 30
+    },
+    {
+      "id": "EXT_012",
+      "label": "Clear Blue Sky — Clean Marketing",
+      "positive": "CrestlineExt, modern residential skyscraper, clear bright blue sky, minimal clouds, clean crisp image, bright daylight, photorealistic, premium real estate photography, ultra-detailed, 8k",
+      "negative": "blurry, low quality, distorted, cartoon, painting, people, watermark, text, haze",
+      "cfg": 6.0,
+      "steps": 30
+    },
+    {
+      "id": "EXT_013",
+      "label": "Symmetrical Frontal Elevation",
+      "positive": "CrestlineExt, perfectly symmetrical frontal elevation shot, luxury residential tower, centered composition, architectural blueprint aesthetic, photorealistic, ultra-detailed, 8k, sharp",
+      "negative": "blurry, low quality, distorted, cartoon, painting, people, watermark, text, angled",
+      "cfg": 6.5,
+      "steps": 30
+    },
+    {
+      "id": "EXT_014",
+      "label": "Balcony Detail — Lifestyle Feel",
+      "positive": "CrestlineExt, residential tower balcony detail, outdoor furniture on balcony, morning light, luxury lifestyle, glass railing, potted plants, architectural photography, ultra-detailed, 8k",
+      "negative": "blurry, low quality, distorted, cartoon, painting, people, watermark, text",
+      "cfg": 6.5,
+      "steps": 30
+    },
+    {
+      "id": "EXT_015",
+      "label": "Dramatic Contrast — B&W Treatment",
+      "positive": "CrestlineExt, monochrome black and white architectural photography, luxury residential tower, high contrast shadows and highlights, dramatic sky, modernist composition, fine art photography, ultra-detailed, 8k",
+      "negative": "blurry, low quality, distorted, cartoon, painting, people, watermark, text, color",
+      "cfg": 7.0,
+      "steps": 35
+    }
+  ]
+}
