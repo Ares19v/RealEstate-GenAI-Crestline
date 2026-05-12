@@ -80,19 +80,19 @@ Generation Phase (on demand, seconds per image / ~10 min per video)
 │  Raw Photos (32)                                                    │
 │       │                                                             │
 │       ▼                                                             │
-│  Caption Engineering ──── WD14 auto-tag + manual refinement        │
-│  ├── dataset/20_CrestlineExt/   (11 images, trigger: CrestlineExt) │
-│  └── dataset/20_CrestlineInt/   (21 images, trigger: CrestlineInt) │
+│  Caption Engineering ──── WD14 auto-tag + manual refinement         │
+│  ├── dataset/20_CrestlineExt/   (11 images, trigger: CrestlineExt)  │
+│  └── dataset/20_CrestlineInt/   (21 images, trigger: CrestlineInt)  │
 │       │                                                             │
 │       ▼                                                             │
 │  Kohya_ss LoRA Training                                             │
-│  ├── Base: SD 1.5 (2.1 GB)                                         │
-│  ├── Optimizer: AdamW8bit | Precision: bf16 | Res: 768px           │
-│  ├── Network: dim=32, alpha=16 | Steps: 1,920 | Epochs: 6         │
-│  └── Loss: 0.13 → 0.11 (healthy convergence, no overfit)          │
+│  ├── Base: SD 1.5 (2.1 GB)                                          │
+│  ├── Optimizer: AdamW8bit | Precision: bf16 | Res: 768px            │
+│  ├── Network: dim=32, alpha=16 | Steps: 1,920 | Epochs: 6           │
+│  └── Loss: 0.13 → 0.11 (healthy convergence, no overfit)            │
 │       │                                                             │
 │       ▼                                                             │
-│  Crestline_Shreshth_v2.safetensors  (~7 MB)                        │
+│  Crestline_Shreshth_v2.safetensors  (~7 MB)                         │
 └───────────────────────┬─────────────────────────────────────────────┘
                         │
 ┌───────────────────────▼─────────────────────────────────────────────┐
