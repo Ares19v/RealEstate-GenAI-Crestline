@@ -43,6 +43,9 @@ jobs:
               && echo "    $f — valid" \
               || { echo "    INVALID JSON: $f"; exit 1; }
           done
+          for f in docs/*.md; do
+            echo "    $f — present"
+          done
 
       - name: Validate prompt library JSON files
         run: |
@@ -141,8 +144,13 @@ jobs:
               "prompts/interior_prompts.json",
               "scripts/batch_generate.py",
               "scripts/requirements.txt",
+              "scripts/batch_video.py",
               "workflows/Crestline_Exterior_v2.json",
               "workflows/Crestline_Interior_v2.json",
+              "workflows/Crestline_AnimateDiff_Txt2Vid_v1.json",
+              "workflows/Crestline_AnimateDiff_Img2Vid_v1.json",
+              "prompts/video_prompts.json",
+              "docs/VIDEO_SETUP.md",
           ]
 
           missing = [f for f in required if not pathlib.Path(f).exists()]
