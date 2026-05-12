@@ -45,6 +45,7 @@ import json
 import os
 import sys
 import time
+import urllib.parse
 import urllib.request
 import urllib.error
 import uuid
@@ -177,8 +178,6 @@ def run_batch(
     seed: int | None,
     count: int | None,
 ):
-    import urllib.parse  # noqa: PLC0415 — needed here for download helper
-
     workflow_base = load_workflow(workflow_path)
     client_id = str(uuid.uuid4())
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -240,8 +239,6 @@ def run_batch(
 # ── CLI ────────────────────────────────────────────────────────────────────────
 
 def main():
-    import urllib.parse  # noqa: PLC0415
-
     parser = argparse.ArgumentParser(
         description="Crestline Shreshth — ComfyUI Batch Generation Script",
         formatter_class=argparse.RawDescriptionHelpFormatter,
