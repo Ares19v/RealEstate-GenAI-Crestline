@@ -9,7 +9,7 @@
 [![Stable Diffusion 1.5](https://img.shields.io/badge/Base_Model-SD_1.5-7C3AED)](https://huggingface.co/stable-diffusion-v1-5/stable-diffusion-v1-5)
 [![AnimateDiff](https://img.shields.io/badge/Video-AnimateDiff_v3-E11D48)](https://github.com/guoyww/AnimateDiff)
 [![Kohya_ss](https://img.shields.io/badge/Training-Kohya__ss-F59E0B)](https://github.com/kohya-ss/sd-scripts)
-[![License: MIT](https://img.shields.io/badge/License-MIT-22C55E)](LICENSE)
+
 
 *A production-grade generative AI pipeline that fine-tunes Stable Diffusion on a real estate property's architecture, then automates photorealistic image and video marketing asset generation — on demand, at zero marginal cost per output.*
 
@@ -529,3 +529,8 @@ Six checkpoints are saved automatically (`v2-000001` through `v2-000005`). Compa
 Built with purpose for the **Crestline Shreshth** real estate development · MIT License · 2026
 
 </div>
+
+---
+<p align="center">
+  Made by Devansh Tyagi @ 2026
+</p>
