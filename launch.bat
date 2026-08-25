@@ -1,67 +1,106 @@
 @echo off
-setlocal
+setlocal EnableDelayedExpansion
+title Crestline Shreshth AI - Studio Launcher
 
 echo.
-echo  ============================================================
-echo   Crestline Shreshth AI Pipeline — Launch Script
-echo  ============================================================
+echo  ========================================================================
+echo    Crestline Shreshth AI Studio  ^|  Real Estate GenAI Pipeline
+echo  ========================================================================
 echo.
 
-:: ── Paths ─────────────────────────────────────────────────────────────────────
-set "COMFYUI_APP=C:\Users\Devansh Tyagi\AppData\Local\Programs\ComfyUI\ComfyUI.exe"
-set "COMFYUI_DIR=C:\Users\Devansh Tyagi\Documents\ComfyUI"
-set "COMFY_LORA_DIR=%COMFYUI_DIR%\models\loras"
-set "COMFY_WORKFLOW_DIR=%COMFYUI_DIR%\user\default\workflows"
+:: -----------------------------------------------------------------------------
+:: Paths
+:: -----------------------------------------------------------------------------
+set "PROJECT_DIR=%~dp0"
+set "COMFYUI_APP=%LOCALAPPDATA%\Programs\ComfyUI\ComfyUI.exe"
+set "COMFYUI_USER_DIR=%USERPROFILE%\Documents\ComfyUI"
+set "COMFY_LORA_DIR=%COMFYUI_USER_DIR%\models\loras"
+set "COMFY_WORKFLOW_DIR=%COMFYUI_USER_DIR%\user\default\workflows"
 
-set "REPO_LORA=models\Crestline_Shreshth_v2.safetensors"
-set "REPO_WORKFLOW_EXT=workflows\Crestline_Exterior_v2.json"
-set "REPO_WORKFLOW_INT=workflows\Crestline_Interior_v2.json"
+:: -----------------------------------------------------------------------------
+:: Ensure target directories exist
+:: -----------------------------------------------------------------------------
+if not exist "%COMFY_LORA_DIR%" mkdir "%COMFY_LORA_DIR%" >nul 2>&1
+if not exist "%COMFY_WORKFLOW_DIR%" mkdir "%COMFY_WORKFLOW_DIR%" >nul 2>&1
 
-:: ── Check ComfyUI is installed ────────────────────────────────────────────────
-if not exist "%COMFYUI_APP%" (
-    echo  [ERROR] ComfyUI not found at:
-    echo          %COMFYUI_APP%
-    echo.
-    echo  Please install the ComfyUI Desktop App first.
-    echo  Download: https://github.com/comfyanonymous/ComfyUI/releases
-    echo.
+:: -----------------------------------------------------------------------------
+:: 1. Deploy LoRA Weights
+:: -----------------------------------------------------------------------------
+echo  [1/3] Syncing LoRA weights...
+if exist "%PROJECT_DIR%models\Crestline_Shreshth_v2.safetensors" (
+    copy /Y "%PROJECT_DIR%models\Crestline_Shreshth_v2.safetensors" "%COMFY_LORA_DIR%\Crestline_Shreshth_v2.safetensors" >nul
+    echo        [OK] Crestline_Shreshth_v2.safetensors is ready
+) else if exist "%COMFY_LORA_DIR%\Crestline_Shreshth_v2.safetensors" (
+    echo        [OK] Crestline_Shreshth_v2.safetensors verified in ComfyUI
+) else (
+    echo        [!] Warning: LoRA not found in models\ folder
+)
+
+:: -----------------------------------------------------------------------------
+:: 2. Deploy Workflows
+:: -----------------------------------------------------------------------------
+echo  [2/3] Syncing ComfyUI workflows...
+set "WF_COUNT=0"
+for %%F in ("%PROJECT_DIR%workflows\*.json") do (
+    copy /Y "%%F" "%COMFY_WORKFLOW_DIR%\" >nul
+    echo        [OK] Loaded workflow: %%~nxF
+    set /a WF_COUNT+=1
+)
+
+:: -----------------------------------------------------------------------------
+:: 3. Check / Start ComfyUI Server
+:: -----------------------------------------------------------------------------
+echo  [3/3] Checking ComfyUI Server status...
+powershell -NoProfile -Command "(New-Object System.Net.Sockets.TcpClient).Connect('127.0.0.1', 8188)" >nul 2>&1
+if %ERRORLEVEL% equ 0 (
+    echo        [OK] ComfyUI server is ALREADY running at http://127.0.0.1:8188
+    goto OPEN_STUDIO
+)
+
+echo        Starting ComfyUI Desktop App...
+if exist "%COMFYUI_APP%" (
+    start "" "%COMFYUI_APP%"
+) else (
+    echo  [ERROR] ComfyUI Desktop not found at: %COMFYUI_APP%
+    echo          Please install ComfyUI Desktop or start ComfyUI manually.
     pause
     exit /b 1
 )
 
-:: ── Deploy LoRA ───────────────────────────────────────────────────────────────
-echo  [1/3] Deploying LoRA model...
-if exist "%REPO_LORA%" (
-    copy /y "%REPO_LORA%" "%COMFY_LORA_DIR%\Crestline_Shreshth_v2.safetensors" >nul
-    echo        OK ^→ Crestline_Shreshth_v2.safetensors
-) else (
-    echo        WARNING: LoRA not found in models\
-    echo        Run training first, or copy the .safetensors file into models\
+echo        Waiting for ComfyUI server to be ready...
+set "WAIT_ATTEMPTS=0"
+
+:WAIT_LOOP
+timeout /t 2 /nobreak >nul
+set /a WAIT_ATTEMPTS+=1
+powershell -NoProfile -Command "(New-Object System.Net.Sockets.TcpClient).Connect('127.0.0.1', 8188)" >nul 2>&1
+if %ERRORLEVEL% equ 0 (
+    echo        [OK] ComfyUI server is ONLINE!
+    goto OPEN_STUDIO
 )
 
-:: ── Deploy Workflows ──────────────────────────────────────────────────────────
-echo  [2/3] Deploying workflows...
-if exist "%REPO_WORKFLOW_EXT%" (
-    copy /y "%REPO_WORKFLOW_EXT%" "%COMFY_WORKFLOW_DIR%\Crestline_Exterior_v2.json" >nul
-    echo        OK ^→ Crestline_Exterior_v2.json
-) else (
-    echo        WARNING: Exterior workflow not found in workflows\
+if %WAIT_ATTEMPTS% lss 15 (
+    goto WAIT_LOOP
 )
 
-if exist "%REPO_WORKFLOW_INT%" (
-    copy /y "%REPO_WORKFLOW_INT%" "%COMFY_WORKFLOW_DIR%\Crestline_Interior_v2.json" >nul
-    echo        OK ^→ Crestline_Interior_v2.json
-) else (
-    echo        WARNING: Interior workflow not found in workflows\
-)
-
-:: ── Launch ────────────────────────────────────────────────────────────────────
-echo  [3/3] Launching ComfyUI...
+:OPEN_STUDIO
 echo.
-echo  ============================================================
-echo   Studio is opening. Access it at: http://127.0.0.1:8188
-echo  ============================================================
+echo  ========================================================================
+echo   Studio is ready! Opening in your default browser...
+echo   URL: http://127.0.0.1:8188
+echo.
+echo   Prompt Trigger Cheat-Sheet:
+echo     - Exterior Architecture : CrestlineExt
+echo     - Interior Amenities    : CrestlineInt
+echo.
+echo   Workflows available in ComfyUI (Load / Browse):
+echo     - Crestline_Exterior_v2
+echo     - Crestline_Interior_v2
+echo     - Crestline_AnimateDiff_Txt2Vid_v1
+echo     - Crestline_AnimateDiff_Img2Vid_v1
+echo  ========================================================================
 echo.
 
-start "" "%COMFYUI_APP%"
+start "" "http://127.0.0.1:8188"
+timeout /t 3 >nul
 exit /b 0
