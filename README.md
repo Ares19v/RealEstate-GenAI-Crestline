@@ -11,7 +11,7 @@
 [![Kohya_ss](https://img.shields.io/badge/Training-Kohya__ss-F59E0B)](https://github.com/kohya-ss/sd-scripts)
 
 
-*A production-grade generative AI pipeline that fine-tunes Stable Diffusion on a real estate property's architecture, then automates photorealistic image and video marketing asset generation — on demand, at zero marginal cost per output.*
+*A high-performance generative AI pipeline that fine-tunes Stable Diffusion on a real estate property's architecture, then automates photorealistic image and video marketing asset generation — on demand, at zero marginal cost per output.*
 
 </div>
 
