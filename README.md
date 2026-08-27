@@ -524,17 +524,6 @@ Six checkpoints are saved automatically (`v2-000001` through `v2-000005`). Compa
 
 ---
 
-<div align="center">
-
-Built with purpose for the **Crestline Shreshth** real estate development · MIT License · 2026
-
-</div>
-
----
-<p align="center">
-  Made by Devansh Tyagi @ 2026
-</p>
-
 ## 🤗 Model on Hugging Face
 
 The trained model is available on Hugging Face: [devanshty/Crestline-Shreshth](https://huggingface.co/devanshty/Crestline-Shreshth)
@@ -545,3 +534,9 @@ The trained model is available on Hugging Face: [devanshty/Crestline-Shreshth](h
 from huggingface_hub import hf_hub_download
 model_path = hf_hub_download(repo_id='devanshty/Crestline-Shreshth', filename='Crestline_Shreshth_v2.safetensors')
 ```
+
+---
+
+© 2025 Devansh Tyagi (Ares19v). All Rights Reserved.
+
+Unauthorized copying, modification, distribution, or use of this project or any of its components, in whole or in part, without explicit written permission from the author is strictly prohibited.
